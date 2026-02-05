@@ -1,0 +1,47 @@
+services:
+  strapi:
+    container_name: strapi_app
+    build:
+      context: ./my-strapi-project
+      dockerfile: Dockerfile
+    image: my-strapi-project
+    restart: unless-stopped
+    env_file: ./my-strapi-project/.env
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapi
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapiPassword
+      NODE_ENV: development
+    volumes:
+      - ./my-strapi-project/config:/opt/app/config
+      - ./my-strapi-project/src:/opt/app/src
+      - ./my-strapi-project/public/uploads:/opt/app/public/uploads
+      - ./my-strapi-project/.env:/opt/app/.env
+    ports:
+      - "1337:1337"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: strapi_postgres
+    environment:
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapiPassword
+      POSTGRES_DB: strapi
+    ports:
+      - "5432:5432"
+    volumes:
+      - strapi_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi -d strapi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  strapi_data:
