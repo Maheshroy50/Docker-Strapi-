@@ -41,6 +41,7 @@ services:
       APP_KEYS: ${app_keys}
       API_TOKEN_SALT: ${api_token_salt}
       ADMIN_JWT_SECRET: ${jwt_secret}
+      JWT_SECRET: ${jwt_secret}
       TRANSFER_TOKEN_SALT: ${transfer_token_salt}
     ports:
       - "1337:1337"
