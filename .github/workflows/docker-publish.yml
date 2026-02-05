@@ -29,4 +29,4 @@ jobs:
           file: ./my-strapi-project/Dockerfile
           push: true
           # Replace 'latest' with a specific version tag if needed for production
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-strapi-project:latest
+          tags: maheshbhoopathirao/my-strapi-project:latest
