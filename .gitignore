@@ -20,6 +20,7 @@ build/
 docker-compose.override.yml
 
 # Terraform
+terraform/
 .terraform/
 *.tfstate
 *.tfstate.backup
@@ -34,3 +35,9 @@ strapi-key.pub
 # IDEs
 .vscode/
 .idea/
+
+#Documents
+AWS_Architecture.md
+
+#Github Actions
+.github/workflows
