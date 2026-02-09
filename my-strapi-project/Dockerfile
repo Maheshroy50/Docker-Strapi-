@@ -16,6 +16,6 @@ RUN chown -R node:node /opt/app
 # Switch to non-root user for security (and to match file ownership)
 USER node
 
-RUN npm ci --only=production
+RUN npm build
 EXPOSE 1337
 CMD ["npm", "run", "start"]
